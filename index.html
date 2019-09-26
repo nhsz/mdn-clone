@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css" />
+    <link rel="stylesheet" href="codemirror/theme/dracula.css" />
+    <title>Array.prototype._forEach() - JavaScript | MDN</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul class="nav-list">
+          <li class="nav-jump-to">Saltar a:</li>
+          <li><a href="#">Inicio</a></li>
+          <li><a href="#syntax">Sintaxis</a></li>
+          <li><a href="#examples">Ejemplos</a></li>
+          <li><a href="#">Acerca de</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <aside class="sidebar">
+        <ul class="sidebar-list">
+          <li><a href="">Array.prototype._concat()</a></li>
+          <li><a href="">Array.prototype._every()</a></li>
+          <li><a href="">Array.prototype._filter()</a></li>
+          <li><a href="">Array.prototype._find()</a></li>
+          <li><a href="">Array.prototype._findIndex()</a></li>
+          <li><a href="">Array.prototype._forEach()</a></li>
+          <li><a href="">Array.prototype._includes()</a></li>
+          <li><a href="">Array.prototype._indexOf()</a></li>
+          <li><a href="">Array.prototype._indexOfRecursive()</a></li>
+          <li><a href="">Array.prototype._intersection()</a></li>
+          <li><a href="">Array.prototype._isEqual()</a></li>
+          <li><a href="">Array.prototype._lastIndexOf()</a></li>
+          <li><a href="">Array.prototype._map()</a></li>
+          <li><a href="">Array.prototype._max()</a></li>
+          <li><a href="">Array.prototype._min()</a></li>
+          <li><a href="">Array.prototype._reduce()</a></li>
+          <li><a href="">Array.prototype._some()</a></li>
+          <li><a href="">Array.prototype._sum()</a></li>
+          <li><a href="">Array.prototype._union()</a></li>
+        </ul>
+      </aside>
+      <main class="content">
+        <h1>_forEach()</h1>
+        <p class="description">
+          El método <span class="description-method-name"><strong>_forEach()</strong></span> ejecuta la función indicada
+          una vez por cada elemento del array.
+        </p>
+
+        <div id="editor">
+          <textarea id="codesandbox">
+const array = ['a', 'b', 'c'];
+
+array._forEach(function(element) {
+  console.log(element);
+});
+
+// expected output: "a"
+// expected output: "b"
+// expected output: "c"
+        </textarea
+          >
+
+          <div id="console">
+            <div class="console-buttons">
+              <button id="execute">Run ›</button>
+              <button id="reset">Reset</button>
+            </div>
+
+            <div id="console-border">
+              <div id="console-output"></div>
+            </div>
+          </div>
+        </div>
+
+        <section id="syntax">
+          <h2>Sintaxis</h2>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos fuga, at atque eveniet corrupti temporibus
+            totam quisquam itaque est nostrum, facilis optio doloribus quaerat ratione, iste hic. Eum, delectus odio?
+          </p>
+          <p>
+            Explicabo, libero accusamus saepe eligendi alias quaerat molestias necessitatibus modi! Sequi, dolores nihil
+            iusto quibusdam sint, a perspiciatis quas aspernatur ipsa qui dolorem, eveniet atque facere. Minima veniam
+            magnam obcaecati.
+          </p>
+          <p>
+            Asperiores veniam ipsum sint? Eius, voluptas? Omnis voluptas culpa hic corporis deleniti saepe beatae
+            maiores, eos ut et consequuntur amet nisi tenetur architecto tempora? Quo architecto beatae adipisci ex
+            numquam!
+          </p>
+        </section>
+        <section id="examples">
+          <h2>Ejemplos</h2>
+          <p>
+            Magni consectetur vitae repellendus illo dicta atque id delectus modi! Hic dicta porro deserunt quasi earum
+            dignissimos magnam pariatur vitae quos ullam, unde tenetur aliquid quis, odit ipsam autem repellendus.
+          </p>
+          <p>
+            Consequatur, odit! Eaque eius nobis, vel praesentium laboriosam aperiam. Eum cumque repellat inventore
+            suscipit impedit aliquid laudantium, in fugit, officiis quo quidem labore ratione earum illo. Modi labore
+            sed facilis?
+          </p>
+          <p>
+            Expedita aspernatur, ea eius, culpa ipsam sint sed quaerat cumque animi odio amet officia mollitia. Quos
+            dolorem in non laudantium! Facere molestiae recusandae rerum quasi similique. Deserunt voluptatum sequi
+            magnam?
+          </p>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+    <script src="codemirror/lib/codemirror.js"></script>
+    <script src="codemirror/mode/javascript/javascript.js"></script>
+    <script>
+      const codeSandbox = CodeMirror.fromTextArea(codesandbox, {
+        mode: 'javascript',
+        theme: 'dracula',
+        tabSize: 2,
+        lineNumbers: true
+      });
+
+      codeSandbox.setSize(null, '240px');
+
+      const executeButton = document.getElementById('execute');
+      const resetButton = document.getElementById('reset');
+
+      executeButton.addEventListener('click', () => {
+        const consoleOutput = document.getElementById('console-output');
+        consoleOutput.innerHTML = '';
+        consoleOutput.classList.toggle('fade-in');
+
+        const f = new Function(codeSandbox.getValue());
+        f();
+      });
+
+      resetButton.addEventListener('click', () => {
+        window.location.reload();
+      });
+
+      // hack: override console.log behavior to also display output on #console-output
+      const log = console.log;
+
+      console.log = function() {
+        const consoleOutput = document.getElementById('console-output');
+        let output = '';
+
+        for (argument of arguments) {
+          output += `${argument}`;
+        }
+
+        consoleOutput.innerText += `> ${output}\n`;
+        log(output);
+      };
+    </script>
+  </body>
+</html>
